@@ -22,7 +22,8 @@ app.post('/sendMail', (req, res) => {
         port: 587,
         auth: { user: process.env.USER, pass: process.env.PASS },
         tls: {
-            ciphers:'SSLv3'
+            ciphers:'SSLv3',
+            rejectUnauthorized: false,
         }
     });
 
