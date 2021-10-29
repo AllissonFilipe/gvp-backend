@@ -17,18 +17,15 @@ app.use(express.json());
 
 app.post('/sendMail', (req, res) => {
     const transporter = nodemailer.createTransport({
-        host: 'smtp.office365.com',
+        host: 'smtp.umbler.com',
         port: 587,
         secure: false,
         auth: { user: process.env.USER, pass: process.env.PASS },
-        tls: {
-            ciphers:'SSLv3',
-        }
     });
 
     transporter.sendMail({
         from: process.env.USER,
-        to: process.env.USER,
+        to: process.env.RECIPIENT,
         replyTo: req.body.email,
         subject: `Contato do Site - Usuario ${req.body.firstname}  ${req.body.lastname}`,
         html: `<!DOCTYPE html>
