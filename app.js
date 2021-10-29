@@ -17,13 +17,12 @@ app.use(express.json());
 
 app.post('/sendMail', (req, res) => {
     const transporter = nodemailer.createTransport({
-        host: 'smtp-mail.outlook.com',
-        secureConnection: false,
+        host: 'smtp.office365.com',
         port: 587,
+        secure: false,
         auth: { user: process.env.USER, pass: process.env.PASS },
         tls: {
             ciphers:'SSLv3',
-            rejectUnauthorized: false,
         }
     });
 
