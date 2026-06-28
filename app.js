@@ -17,17 +17,17 @@ app.use(express.json());
 
 app.post('/sendMail', (req, res) => {
     const transporter = nodemailer.createTransport({
-        host: 'smtp.resend.com',
-        port: 465,
-        secure: true,
+        host: 'smtp-relay.brevo.com',
+        port: 587,
+        secure: false,
         auth: {
-            user: 'resend',
-            pass: process.env.RESEND_API_KEY,
+            user: process.env.BREVO_USER,
+            pass: process.env.BREVO_SMTP_KEY,
         },
     });
 
     transporter.sendMail({
-        from: process.env.RESEND_FROM,
+        from: process.env.BREVO_FROM,
         to: process.env.RECIPIENT,
         replyTo: req.body.email,
         subject: `Contato do Site - Usuario ${req.body.firstname}  ${req.body.lastname}`,
