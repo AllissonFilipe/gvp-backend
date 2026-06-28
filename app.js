@@ -17,14 +17,17 @@ app.use(express.json());
 
 app.post('/sendMail', (req, res) => {
     const transporter = nodemailer.createTransport({
-        host: 'smtp.umbler.com',
-        port: 587,
-        secure: false,
-        auth: { user: process.env.USER, pass: process.env.PASS },
+        host: 'smtp.resend.com',
+        port: 465,
+        secure: true,
+        auth: {
+            user: 'resend',
+            pass: process.env.RESEND_API_KEY,
+        },
     });
 
     transporter.sendMail({
-        from: process.env.USER,
+        from: process.env.RESEND_FROM,
         to: process.env.RECIPIENT,
         replyTo: req.body.email,
         subject: `Contato do Site - Usuario ${req.body.firstname}  ${req.body.lastname}`,
